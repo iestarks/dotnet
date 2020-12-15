@@ -18,9 +18,10 @@ resource "azurerm_container_group" "tfcg_test" {
     os_type         = "Linux"
 
 variable "imagebuild" {
-type = string
-description = "Latest TF_VAR image build"
+  type        = string
+  description = "Latest Image Build"
 }
+
 
     container {
          name = "weatherapi"

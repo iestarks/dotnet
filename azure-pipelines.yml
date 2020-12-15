@@ -23,7 +23,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'Docker and ADO'   #SVC Connection name
-        repository: 'istarks/weatherapi'
+        repository: 'istarks/weatherapi:latest'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: |

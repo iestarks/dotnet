@@ -17,9 +17,14 @@ resource "azurerm_container_group" "tfcg_test" {
     dns_name_label =  "istarks"
     os_type         = "Linux"
 
+variable "imagebuild" {
+type = string
+description = "TF_VAR image build"
+}
+
     container {
          name = "weatherapi"
-         image = "istarks/weatherapi"
+         image = "istarks/weatherapi: ${var.imagebuild}"
          cpu  = "1"
          memory = "1"
 

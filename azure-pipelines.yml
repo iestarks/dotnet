@@ -22,33 +22,34 @@ stages:
     steps:
     - task: Docker@2
       inputs:
-        containerRegistry: 'Docker and ADO'
-        repository: 'istarks/weatherapi'
+        containerRegistry: 'Binarythistle Docker Hub'
+        repository: 'binarythistle/weatherapi'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-        tags:
+        tags: |
           $(tag)
 - stage: Provision
-  displayName: 'Terraform apply on Azure'
+  displayName: 'Terraforming on Azure...'
   dependsOn: Build
-  jobs: 
-  -   job: Provision
-      displayName: 'Provisioning Container Instance'
-      pool:
-       vmImage: 'ubuntu-latest'
-      variables:
-      - group: TerraformEnvVars
-      steps:
-       - script:
-      set -e 
-          terraform init -input=false
-          terraform apply -input=false -auto-approve
-  name: 'Run Terraform'
-   displayName: 'Run Terraform'
-      env: 
-          ARM_CLIENT_ID: $(ARM_CLIENT_ID)
-          ARM_TENANT_ID: $(ARM_TENANT_ID)
-          ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
-          ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+  jobs:
+  - job: Provision
+    displayName: 'Provisioning Container Instance'
+    pool:
+      vmImage: 'ubuntu-latest'
+    variables: 
+    - group: TeraformEnvVars
+    steps:
+    - script: |
+        set -e
+        terraform init -input=false
+        terraform apply -input=false -auto-approve
+      name: 'RunTerraform'
+      displayName: 'Run Terraform'
+      env:
+        ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+        ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+        ARM_TENANT_ID: $(ARM_TENANT_ID)
+        ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+        TF_VAR_imagebuild: $(tag)
 
     

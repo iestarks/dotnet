@@ -19,7 +19,7 @@ resource "azurerm_container_group" "tfcg_test" {
 
 variable "imagebuild" {
 type = string
-description = "TF_VAR image build"
+description = "Latest TF_VAR image build"
 }
 
     container {

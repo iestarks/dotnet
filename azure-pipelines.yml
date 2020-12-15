@@ -21,7 +21,7 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
     - task: Docker@2
-      Inputs:
+      inputs:
         containerRegistry: 'Docker and ADO'
         repository: 'istarks/weatherapi'
         command: 'buildAndPush'

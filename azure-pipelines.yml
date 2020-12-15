@@ -28,6 +28,9 @@ stages:
         Dockerfile: '**/Dockerfile'
         tags: |
           $(tag)
+          - task: TerraformInstaller@0
+            inputs:
+              terraformVersion: '0.13.5'
 - stage: Provision
   displayName: 'Terraforming on Azure...'
   dependsOn: Build

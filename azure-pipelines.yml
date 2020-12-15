@@ -20,12 +20,13 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-        tags: |
-          $(tag)
-    - task: Docker@2
-      inputs:
+     - task: Docker@2
+       Inputs:
         containerRegistry: 'Docker and ADO'
         repository: 'istarks/weatherapi'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
+        tags:
+          $(tag)
+
     

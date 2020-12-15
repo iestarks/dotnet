@@ -43,7 +43,7 @@ stages:
     steps:
     - task: TerraformInstaller@0
       inputs:
-        terraformVersion: '0.13.4'
+        terraformVersion: '0.14.2'
     - script: |
         set -e
         terraform init -input=false

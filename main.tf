@@ -8,6 +8,12 @@ name = "tfmainrg"
 location = "eastus"  
 }
 
+variable "imagebuild" {
+  type        = string
+  description = "Latest Image Build"
+}
+
+
 resource "azurerm_container_group" "tfcg_test" {
     name          = "weatherapi"
     location      = azurerm_resource_group.terraform_az_test.location
@@ -17,10 +23,6 @@ resource "azurerm_container_group" "tfcg_test" {
     dns_name_label =  "istarks"
     os_type         = "Linux"
 
-variable "imagebuild" {
-  type        = string
-  description = "Latest Image Build"
-}
 
 
     container {
@@ -36,4 +38,8 @@ variable "imagebuild" {
 
     }
   
+}
+
+output "imagebuild" {
+  value = var.imagebuild
 }

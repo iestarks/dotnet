@@ -24,7 +24,7 @@ description = "TF_VAR image build"
 
     container {
          name = "weatherapi"
-         image = "istarks/weatherapi: ${var.imagebuild}"
+         image = "istarks/weatherapi:${var.imagebuild}"
          cpu  = "1"
          memory = "1"
 
